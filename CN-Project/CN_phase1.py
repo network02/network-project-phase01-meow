@@ -1,4 +1,3 @@
-import requests
 import socket
 from _socket import getservbyport
 
