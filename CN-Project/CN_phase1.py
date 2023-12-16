@@ -15,8 +15,28 @@ def check_open_ports(host, port_range):
         except socket.error:
             pass
 
+def check_host_online(host, port):
+    try:
+        socket.create_connection((host, port))
+        return True
+    except socket.error:
+        return False
+
 if __name__ == "__main__":
 
-    host = input("Host: ")
-    port_range = (int(input("Lower_Port: ")), int(input("Upper_Port: ")))
-    check_open_ports(host, port_range)
+    action = input("What do you want to do?\n 1.Check if the host is online\n 2.Check open ports and its services\n")
+    match action:
+        case "1":
+            host = input("Host: ")
+            port = input("Port: ")
+            is_host_online = check_host_online(host, port)
+            if is_host_online:
+                print("Host is online.")
+            else:
+                print("Host is offline.")
+        case "2":
+            host = input("Host: ")
+            port_range = (int(input("Lower_Port: ")), int(input("Upper_Port: ")))
+            check_open_ports(host, port_range)
+
+
